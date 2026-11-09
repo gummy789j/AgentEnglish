@@ -128,10 +128,20 @@ class Pastes {
 // TUI wrapping is a display operation. Accept an original insertion only
 // after its visible characters agree with what the editor actually painted.
 const flat = (s) => s.replace(/\n/g, "");
-function align(candidate, visible, before, { top, bottom }, preferred) {
+function align(candidate, visible, before, clipping, preferred) {
   if (candidate == null || visible == null || before == null) return null;
-  const full = flat(candidate),
-    part = flat(visible);
+  const exact = alignProjected(candidate, visible, before, clipping, preferred, flat);
+  if (exact != null || !visible.includes("\n")) return exact;
+  // Word wrapping may consume the space between two rendered rows. Require
+  // each row, including its internal spaces, to agree with the original.
+  const lines = visible.split("\n").filter(Boolean);
+  const original = flat(candidate);
+  if (!lines.every(line => original.includes(line))) return null;
+  return alignProjected(candidate, visible, before, clipping, preferred, s => s.replace(/\s/g, ""));
+}
+function alignProjected(candidate, visible, before, { top, bottom }, preferred, project) {
+  const full = project(candidate),
+    part = project(visible);
   let offset = top && !bottom ? full.length - part.length : 0;
   if (top && bottom) {
     offset = full.indexOf(part);
@@ -143,13 +153,13 @@ function align(candidate, visible, before, { top, bottom }, preferred) {
     !full.startsWith(part, offset)
   )
     return null;
-  const prefix = offset + flat(before).length;
-  if (preferred >= 0 && flat(candidate.slice(0, preferred)).length === prefix)
+  const prefix = offset + project(before).length;
+  if (preferred >= 0 && project(candidate.slice(0, preferred)).length === prefix)
     return preferred;
   let index = 0,
     chars = 0;
   while (index < candidate.length && chars < prefix)
-    if (candidate[index++] !== "\n") chars++;
+    if (project(candidate[index++]).length) chars++;
   return index;
 }
 class DraftReader {
@@ -204,6 +214,10 @@ class DraftReader {
       this.text = candidate;
       this.cursor = cursor;
       if (candidate === this.expected || candidate === this.insertion) {
+        // A wrapped literal paste may never appear as a contiguous substring
+        // on screen. The validated insertion now accounts for that paste.
+        const pending = this.pastes.pending.indexOf(this.insertion);
+        if (pending >= 0) this.pastes.pending.splice(pending, 1);
         this.expected = null;
         this.insertion = null;
       }

@@ -31,3 +31,13 @@ test("a collapsed bracketed paste retains the original full-width text", () => {
   const marker = "[Pasted text #1 +2 lines]";
   assert.equal(reader.refresh({text:marker,before:marker,top:false,bottom:false}), original);
 });
+
+test("word-wrapped pastes do not displace the next collapsed paste", () => {
+  const reader = new DraftReader();
+  const paste = value => reader.input("\x1b[200~" + value + "\x1b[201~");
+  const frame = text => ({text, before:text, top:false, bottom:false});
+  paste("keep this space");
+  assert.equal(reader.refresh(frame("keep this\nspace")), "keep this space");
+  paste(" and this block");
+  assert.equal(reader.refresh(frame("keep this\nspace[Pasted text #1]")), "keep this space and this block");
+});
