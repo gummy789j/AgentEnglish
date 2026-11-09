@@ -1,0 +1,10 @@
+#!/bin/bash
+set -eu
+dir="$(cd "$(dirname "$0")" && pwd)"
+agent="${1:-}"
+case "$agent" in claude|codex) shift;; *) echo "Usage: agent-en {claude|codex} [args...]" >&2; exit 2;; esac
+if [[ ! -t 0 || ! -t 1 ]]; then exec "$agent" "$@"; fi
+case "${1:-}" in -h|--help|-v|--version|-p|--print|exec|review|completion|login|logout|mcp|app-server|doctor|debug|update) exec "$agent" "$@";; esac
+app="$(cd "$dir/../../.." && pwd)"
+[[ "$app" != *.app ]] || open -g "$app"
+exec node "$dir/run.cjs" "$agent" "$@"

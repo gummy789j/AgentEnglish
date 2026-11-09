@@ -1,0 +1,16 @@
+{
+  "name": "agentenglish-terminal",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Terminal draft bridge for AgentEnglish",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "postinstall": "node fix-native.cjs"
+  },
+  "dependencies": {
+    "@xterm/headless": "^6.0.0",
+    "node-pty": "^1.1.0"
+  }
+}

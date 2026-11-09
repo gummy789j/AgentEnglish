@@ -1,0 +1,20 @@
+name: Build and test
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: Bridge/package-lock.json
+      - run: npm ci --prefix Bridge
+      - run: node --test Tests/draft.test.cjs
+      - run: ./Scripts/build.sh
+      - run: codesign --verify --deep --strict dist/AgentEnglish.app
