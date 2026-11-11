@@ -1,0 +1,44 @@
+[
+  {
+    "name": "csv-selection",
+    "text": "\u5e6b\u6211\u628acsv\u6a94\u6848\u88e1\u7684 priority \u70ba1\u7684 smart contract repo \u90fd\u62c9\u4e0b\u4f86 \u5f9e\u9019\u500bgitlab https://gitlab.example.com/team/contracts \u88e1\u9762\u62c9",
+    "mode": "work",
+    "action": "translate",
+    "review": "CSV selects smart contract repositories with priority 1; GitLab supplies those selected repositories. Preserve both sources and the URL."
+  },
+  {
+    "name": "csv-negation",
+    "text": "\u6839\u64da repos.csv \u88e1 priority \u70ba 2 \u800c\u4e14 archived \u70ba false \u7684\u9805\u76ee\uff0c\u5f9e https://gitlab.example.com/team/contracts clone \u5c0d\u61c9\u7684 repo\uff0c\u4e0d\u8981 clone \u5176\u4ed6 repo\u3002",
+    "mode": "work",
+    "action": "translate",
+    "review": "Both priority 2 and archived false apply to repos.csv entries. Clone only matching repositories from the given URL."
+  },
+  {
+    "name": "mixed-mode",
+    "text": "\u6211\u6709\u6642\u5019\u4e5f\u60f3\u76f4\u63a5\u6253\u82f1\u6587 \u4f46\u53ef\u4ee5\u6839\u64damode correct my grammar and give me more concrete sentense",
+    "mode": "work",
+    "action": "translate",
+    "review": "The speaker wants to type English and receive grammar corrections and more specific wording based on the mode. Do not reverse speaker and recipient."
+  },
+  {
+    "name": "everyday-condition",
+    "text": "\u5982\u679c\u660e\u5929\u4e0b\u96e8\u5c31\u628a\u9031\u516d\u7684\u91ce\u9910\u6539\u5230\u9031\u65e5\uff0c\u5730\u9ede\u4e0d\u8b8a\uff0c\u5148\u554f Alex \u80fd\u4e0d\u80fd\u4f86\uff0c\u4e0d\u8981\u76f4\u63a5\u53d6\u6d88\u3002",
+    "mode": "common",
+    "action": "translate",
+    "review": "Keep tomorrow relative. If it rains tomorrow, move the picnic from Saturday to Sunday at the same location; ask Alex first and do not cancel directly."
+  },
+  {
+    "name": "english-polish",
+    "text": "Use repos.csv to find repos where priority is 1, then clone them from https://gitlab.example.com/team/contracts. Dont clone repos not in the csv.",
+    "mode": "work",
+    "action": "polish",
+    "review": "Preserve CSV selection, priority 1, the URL and exclusion of repositories outside the CSV."
+  },
+  {
+    "name": "single-source",
+    "text": "\u5e6b\u6211 clone https://gitlab.example.com/team/contracts \u5230 ~/Projects\uff0c\u5148\u4e0d\u8981\u5b89\u88dd\u4f9d\u8cf4\u3002",
+    "mode": "work",
+    "action": "translate",
+    "review": "Clone the given URL into ~/Projects and do not install dependencies yet. Do not introduce CSV selection or filters."
+  }
+]

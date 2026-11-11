@@ -21,6 +21,8 @@ codesign --verify --deep --strict dist/AgentEnglish.app
 
 With a graphical macOS session, run `./Scripts/test-panel.sh` to verify content-driven height, the scroll cap, and complete-only copying using a private pasteboard. Set `AGENTENGLISH_PREVIEW_PATH` to an absolute PNG path to save the panel preview. These tests require neither a model nor agent accounts.
 
+For prompt changes, run `./Scripts/test-prompts.sh` with Ollama and `qwen3:4b-instruct` installed. It exercises the production generation path on synthetic translation and polishing samples, including CSV selection, retrieval sources, exclusions, speaker roles and relative dates. Each JSON output includes semantic review criteria. Compare the output against those criteria manually; a successful exit means generation completed, not that translation quality passed. Model output can vary. This optional check is not run in CI and does not access the example URLs.
+
 For CLI changes, use a disposable directory that you have already trusted in the CLI. These tests type sample drafts without sending them:
 
 ```sh
