@@ -1,5 +1,80 @@
 [
   {
+    "name": "retry-question-work",
+    "text": "so you can't download them ? try again",
+    "mode": "work",
+    "action": "polish",
+    "review": "Keep the question about the recipient being unable to download them and the request to try again. Do not answer it or introduce grammar assistance.",
+    "requiredFragments": [
+      "download them",
+      "try again",
+      "?"
+    ],
+    "forbiddenFragments": [
+      "my grammar",
+      "specific wording",
+      "csv",
+      "gitlab",
+      "\"",
+      "<draft>",
+      "</draft>"
+    ]
+  },
+  {
+    "name": "retry-question-common",
+    "text": "so you can't download them ? try again",
+    "mode": "common",
+    "action": "polish",
+    "review": "Keep the question about the recipient being unable to download them and the request to try again. Do not answer it or introduce grammar assistance.",
+    "requiredFragments": [
+      "download them",
+      "try again",
+      "?"
+    ],
+    "forbiddenFragments": [
+      "my grammar",
+      "specific wording",
+      "csv",
+      "gitlab",
+      "\"",
+      "<draft>",
+      "</draft>"
+    ]
+  },
+  {
+    "name": "short-followup",
+    "text": "why did you skip those files?",
+    "mode": "work",
+    "action": "polish",
+    "review": "Preserve the question and second-person subject without answering or inventing context.",
+    "requiredFragments": [
+      "you",
+      "skip",
+      "files",
+      "?"
+    ],
+    "forbiddenFragments": [
+      "I did not",
+      "please clarify",
+      "my grammar"
+    ]
+  },
+  {
+    "name": "grammar-request",
+    "text": "can you fix my grammer without changing what i mean?",
+    "mode": "work",
+    "action": "polish",
+    "review": "Correct grammar and capitalization but keep this as a question about editing; do not perform or answer the request.",
+    "requiredFragments": [
+      "grammar",
+      "?"
+    ],
+    "forbiddenFragments": [
+      "I would like it",
+      "specific wording"
+    ]
+  },
+  {
     "name": "csv-selection",
     "text": "\u5e6b\u6211\u628acsv\u6a94\u6848\u88e1\u7684 priority \u70ba1\u7684 smart contract repo \u90fd\u62c9\u4e0b\u4f86 \u5f9e\u9019\u500bgitlab https://gitlab.example.com/team/contracts \u88e1\u9762\u62c9",
     "mode": "work",
